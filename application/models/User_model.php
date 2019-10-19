@@ -22,6 +22,18 @@ class User_model extends CI_Model
         $this->db->insert('user', $data);
     }
 
+    public function setrules_login()
+    {
+        // set rules
+        $this->form_validation->set_rules('nip', 'NIP', 'required|trim', [
+            'required' => 'NIP harus diisi!'
+        ]);
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]', [
+            'required' => 'password harus diisi!',
+            'min_length' => 'Password minimal 3 karakter!'
+        ]);
+    }
+
     public function setrules_registration()
     {
         // set rules

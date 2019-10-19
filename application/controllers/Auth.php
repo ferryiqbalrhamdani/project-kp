@@ -13,14 +13,7 @@ class Auth extends CI_Controller
     {
         $data['title'] = 'Login';
 
-        // set rules
-        $this->form_validation->set_rules('nip', 'NIP', 'required|trim', [
-            'required' => 'NIP harus diisi!'
-        ]);
-        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]', [
-            'required' => 'password harus diisi!',
-            'min_length' => 'Password minimal 3 karakter!'
-        ]);
+        $this->User_model->setrules_login();
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/auth_header', $data);
@@ -51,24 +44,22 @@ class Auth extends CI_Controller
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role_id'] == 1) {
-                        // redirect('admin');
-                        echo 'Selamat datang admin';
+                        redirect('admin');
                     } elseif ($user['role_id'] == 2) {
-                        // redirect('user');
-                        echo 'Selamat datang manager';
+                        redirect('admin');
                     } elseif ($user['role_id'] == 3) {
-                        echo 'Selamat datang user';
+                        redirect('user');
                     }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password salah!</div>');
+                    $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">Password salah!</div>');
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">NIP anda tidak aktif!</div>');
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">NIP anda tidak aktif!</div>');
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">NIP belum di registrasi!</div>');
+            $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">NIP belum di registrasi!</div>');
             redirect('auth');
         }
     }
@@ -97,7 +88,7 @@ class Auth extends CI_Controller
         $this->session->unset_userdata('nip');
         $this->session->unset_userdata('role_id');
 
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kamu telah logged out!</div>');
+        $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Kamu berhasil logout!</div>');
         redirect('auth');
     }
 }
