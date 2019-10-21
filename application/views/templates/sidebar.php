@@ -19,7 +19,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="<?= base_url('admin'); ?>">
+        <a class="nav-link" href="<?= base_url('user'); ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -34,7 +34,7 @@
 
     <!-- Nav Item - Profile -->
     <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('user'); ?>">
+        <a class="nav-link" href="<?= base_url('user/profile'); ?>">
             <i class="fas fa-fw fa-user"></i>
             <span>My Profile</span></a>
     </li>
@@ -70,24 +70,24 @@
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Menu :</h6>
-                <a class="collapse-item" href="login.html">Datar Barang</a>
-                <a class="collapse-item" href="login.html">Tambah Barang</a>
+                <a class="collapse-item" href="<?= base_url('barang'); ?>">Daftar Barang</a>
+                <a class="collapse-item" href="<?= base_url('barang/tambah'); ?>">Tambah Barang</a>
             </div>
         </div>
     </li>
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url('barang/jenis_barang'); ?>">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
+            <span>Jenis Barang</span></a>
     </li>
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?= base_url('barang/merk_barang'); ?>">
             <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
+            <span>Merk Barang</span></a>
     </li>
 
     <!-- Divider -->

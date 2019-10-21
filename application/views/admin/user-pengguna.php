@@ -9,7 +9,7 @@
     <!-- Content Row -->
     <div class="row mt-3">
         <div class="col-md-6">
-            <ul class="list-group">
+            <ul class="list-group ">
                 <?php foreach ($users as $u) : ?>
                     <li class="list-group-item">
                         <?= $u['nama']; ?>

@@ -9,17 +9,6 @@ class Admin extends CI_Controller
         $this->load->model('User_model');
     }
 
-    public function index()
-    {
-        $data['title'] = 'Dashboard';
-        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('admin/index', $data);
-        $this->load->view('templates/footer', $data);
-    }
-
     public function user_pengguna()
     {
         $data['title'] = 'Daftar User';

@@ -6,8 +6,14 @@
         <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
     </div>
 
-    <!-- Content Row -->
     <div class="row">
+        <div class="col">
+            <a class="btn btn-primary" href="<?= base_url('barang/add_jenis_barang'); ?>">Tambah Jenis Barang</a>
+        </div>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row mt-3">
         <div class="col">
             <div class="card o-hidden border-0 shadow-lg">
                 <div class="card-body">
@@ -15,35 +21,20 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">NIP</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Jenis Kelamin</th>
-                                <th scope="col">No. Telp</th>
-                                <th scope="col">Jabatan</th>
+                                <th scope="col">Nama Jenis Barang</th>
+                                <th scope="col">Dibuat</th>
                                 <th scope="col">Aksi</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
-                            <?php foreach ($users as $u) : ?>
+                            <?php foreach ($jenis_barang as $j) : ?>
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
-                                    <td><?= $u['nip']; ?></td>
-                                    <td><?= $u['nama']; ?></td>
-                                    <td><?= $u['jenis_kelamin']; ?></td>
-                                    <td><?= $u['telp']; ?></td>
+                                    <td><?= $j['nama_barang']; ?></td>
+                                    <td><?= date('d F Y', $j['date_created']); ?></td>
                                     <td>
-                                        <?php if ($u['role_id'] == 1) : ?>
-                                            Admin
-                                        <?php elseif ($u['role_id'] == 2) : ?>
-                                            Manager
-                                        <?php elseif ($u['role_id'] == 3) : ?>
-                                            Member
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <a href="" class="badge badge-primary">detail</a>
                                         <a href="" class="badge badge-danger">hapus</a>
                                     </td>
                                 </tr>
