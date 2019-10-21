@@ -19,7 +19,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?= base_url('admin'); ?>">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -34,21 +34,21 @@
 
     <!-- Nav Item - Profile -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url('user'); ?>">
             <i class="fas fa-fw fa-user"></i>
             <span>My Profile</span></a>
     </li>
 
     <!-- Nav Item - User Pengguna -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url('admin/user_pengguna'); ?>">
             <i class="fas fa-fw fa-users"></i>
             <span>User Pengguna</span></a>
     </li>
 
     <!-- Nav Item - Data user -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="<?= base_url('admin/users'); ?>">
             <i class="fas fa-fw fa-folder"></i>
             <span>Data User</span></a>
     </li>

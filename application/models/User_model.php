@@ -2,6 +2,11 @@
 
 class User_model extends CI_Model
 {
+    public function getAllUser()
+    {
+        return $this->db->get('user')->result_array();
+    }
+
     public function tambahDataUser()
     {
         $data = [
@@ -40,11 +45,10 @@ class User_model extends CI_Model
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim', [
             'required' => 'Nama harus diisi!'
         ]);
-        $this->form_validation->set_rules('nip', 'Nip', 'required|trim|numeric|max_length[5]|is_unique[user.nip]', [
+        $this->form_validation->set_rules('nip', 'Nip', 'required|trim|max_length[5]|is_unique[user.nip]', [
             'required' => 'Nip harus diisi!',
             'max_length' => 'NIP maksimal 5 angka',
-            'is_unique' => 'NIP sudah terdaftar',
-            'numeric' => 'Harus berupa angka.'
+            'is_unique' => 'NIP sudah terdaftar'
         ]);
         $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
             'required' => 'Email harus diisi!',
