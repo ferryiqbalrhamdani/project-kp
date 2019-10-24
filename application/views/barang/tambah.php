@@ -7,9 +7,15 @@
     </div>
 
     <!-- Content Row -->
-    <div class="row">
-        <div class="col">
-            <a href="<?= base_url('barang/ap'); ?>" class="btn btn-primary">AP</a>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <ul class="list-group ">
+                <?php foreach ($barang as $b) : ?>
+                    <li class="list-group-item">
+                        <a href="<?= base_url('barang/tambah_') . $b['nama_barang']; ?>" class="logo"><?= $b['nama_barang']; ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         </div>
     </div>
 

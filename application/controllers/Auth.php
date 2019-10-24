@@ -44,9 +44,9 @@ class Auth extends CI_Controller
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role_id'] == 1) {
-                        redirect('admin');
+                        redirect('user');
                     } elseif ($user['role_id'] == 2) {
-                        redirect('admin');
+                        redirect('user');
                     } elseif ($user['role_id'] == 3) {
                         redirect('user');
                     }
@@ -79,7 +79,7 @@ class Auth extends CI_Controller
 
             $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
             Akun berhasil terdaftar.</div>');
-            redirect('auth');
+            redirect('user');
         }
     }
 

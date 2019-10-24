@@ -13,7 +13,9 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h4 class="h5 text-gray-900 ">Halama Login</h4>
-                                    <h1 class="h1 text-gray-900 mb-4">TELKOM AKSES</h1>
+                                    <img src="<?= base_url('assets/img/background/telkom-akses.png'); ?>" style="width: 255px;
+                                        margin-top: -36px;
+                                        margin-left: 58px;" class="mb-3" alt="">
                                 </div>
 
                                 <?= $this->session->flashdata('pesan'); ?>
@@ -27,7 +29,7 @@
                                         <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
                                         <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    <button type="submit" class="btn btn-danger btn-user btn-block">
                                         Login
                                     </button>
                                 </form>

@@ -7,9 +7,15 @@
     </div>
 
     <!-- Content Row -->
-    <div class="row">
-        <div class="col">
-
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <ul class="list-group ">
+                <?php foreach ($barang as $b) : ?>
+                    <li class="list-group-item">
+                        <a href="<?= base_url('barang/') . $b['nama_barang']; ?>" class=""><?= $b['nama_barang']; ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         </div>
     </div>
 
