@@ -3,8 +3,8 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"><?= $title; ?></h1>
-        <a href="<?= base_url('admin/is_active'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class=" fa-sm text-white-50"></i> User Tidak Active</a>
+        <h1 class="h3 mb-0 text-gray-800"><?= $title; ?> Tidak Active</h1>
+        <a href="<?= base_url('admin/users'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class=" fa-sm text-white-50"></i> Kembali</a>
     </div>
 
     <?= $this->session->flashdata('pesan'); ?>
@@ -30,7 +30,7 @@
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($users as $u) : ?>
-                                <?php if ($u['is_active'] == 1) : ?>
+                                <?php if ($u['is_active'] == 0) : ?>
                                     <tr>
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $u['nip']; ?></td>

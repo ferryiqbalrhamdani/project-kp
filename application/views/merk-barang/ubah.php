@@ -13,12 +13,10 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h4 class="h5 text-gray-900 ">Tambah <?= $title; ?></h4>
+                                    <h4 class="h5 text-gray-900 "><?= $title; ?></h4>
                                 </div>
-
-
-
-                                <form class="user" method="post" action="<?= base_url('barang/add_merk_barang'); ?>">
+                                <form class="user" method="post" action="<?= base_url('barang/editMerk/') . $merk['id']; ?>">
+                                    <input type="hidden" name="id" value="<?= $merk['id']; ?>">
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -26,7 +24,7 @@
                                             </div>
                                             :
                                             <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="nama_merk" name="nama_merk" value="<?= set_value('nama_merk'); ?>">
+                                                <input type="text" class="form-control form-control-sm" id="nama_merk" name="nama_merk" value="<?= $merk['nama_merk']; ?>">
                                                 <?= form_error('nama_merk', '<small class="text-danger pl-3">', '</small>'); ?>
                                             </div>
                                         </div>
@@ -39,10 +37,12 @@
                                             :
                                             <div class="col">
                                                 <select class="form-control form-control-sm" id="jenis_barang" name="jenis_barang">
-                                                    <option></option>
                                                     <?php foreach ($jenis_barang as $j) : ?>
-                                                        <option><?= $j['nama_barang']; ?></option>
-
+                                                        <?php if ($j['nama_barang'] == $merk['jenis_barang']) : ?>
+                                                            <option selected><?= $j['nama_barang']; ?></option>
+                                                        <?php else : ?>
+                                                            <option><?= $j['nama_barang']; ?></option>
+                                                        <?php endif; ?>
                                                     <?php endforeach; ?>
                                                 </select>
                                                 <?= form_error('jenis_barang', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -50,8 +50,9 @@
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Tambah Data
+                                        Ubah Data
                                     </button>
+
                                 </form>
                                 <hr>
                                 <div class="text-center">

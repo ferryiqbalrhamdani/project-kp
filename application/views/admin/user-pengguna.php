@@ -9,9 +9,9 @@
     <!-- Content Row -->
     <div class="row mt-3">
         <div class="col-md-6">
-            <ul class="list-group ">
+            <ul class="list-group bg-primary">
                 <?php foreach ($users as $u) : ?>
-                    <li class="list-group-item">
+                    <li class="list-group-item texti-white">
                         <?= $u['nama']; ?>
                         <a href="<?= base_url(); ?>admin/pesan/<?= $u['id']; ?>" class="badge badge-success float-right">pesan</a>
                         <div class="badge float-right"> </div>

@@ -11,7 +11,7 @@
             <a class="btn btn-primary" href="<?= base_url('barang/add_jenis_barang'); ?>">Tambah Jenis Barang</a>
         </div>
     </div>
-
+    <?= $this->session->flashdata('pesan'); ?>
     <!-- Content Row -->
     <div class="row mt-3">
         <div class="col">
@@ -35,7 +35,9 @@
                                     <td><?= $j['nama_barang']; ?></td>
                                     <td><?= date('d F Y', $j['date_created']); ?></td>
                                     <td>
-                                        <a href="" class="badge badge-danger">hapus</a>
+                                        <a href="<?= base_url('barang/jenisBarangUpdate/') . $j['id']; ?>" class="badge badge-success">edit</a>
+                                        |
+                                        <a href="<?= base_url('barang/jenisBarangDelete/') . $j['id']; ?>" class="badge badge-danger tombol-hapus-jenis-barang">hapus</a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>

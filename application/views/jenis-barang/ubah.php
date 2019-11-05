@@ -13,18 +13,17 @@
                         <div class="col-lg">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h4 class="h5 text-gray-900 ">Tambah <?= $title; ?></h4>
+                                    <h4 class="h5 text-gray-900 "><?= $title; ?></h4>
                                 </div>
 
-                                <?= $this->session->flashdata('pesan'); ?>
-
-                                <form class="user" method="post" action="<?= base_url('barang/add_jenis_barang'); ?>">
+                                <form class="user" method="post" action="<?= base_url('barang/jenisBarangUpdate/') . $jenis_barang['id']; ?>">
+                                    <input type="hidden" name="id" value="<?= $jenis_barang['id']; ?>">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Masukan Jenis Barang" value="<?= set_value('nama'); ?>">
+                                        <input type="text" class="form-control" id="nama_barang" name="nama_barang" placeholder="Masukan Jenis Barang" value="<?= $jenis_barang['nama_barang']; ?>">
                                         <?= form_error('nama_barang', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Tambah Data
+                                    <button type="submit" name="ubah" class="btn btn-primary btn-user btn-block">
+                                        Ubah Data
                                     </button>
                                 </form>
                                 <hr>

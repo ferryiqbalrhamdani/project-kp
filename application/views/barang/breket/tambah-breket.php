@@ -6,16 +6,14 @@
 
         <div class="col-lg-7">
 
-            <?php if (form_error('merk', 'sn', 'mac')) : ?>
+            <?php if (form_error('jumlah',)) : ?>
                 <div class="row">
                     <div class="col-md-4">
                         Pesan Kesalahan
                     </div>
                     :
                     <div class="col">
-                        <?= form_error('merk', '<small class="text-danger pl-3">', '</small>'); ?>
-                        <?= form_error('sn', '<small class="text-danger pl-3">', '</small>'); ?>
-                        <?= form_error('mac', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <?= form_error('jumlah', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
 
@@ -31,7 +29,8 @@
                                     <h4 class="h5 text-gray-900 "><?= $title; ?></h4>
                                 </div>
                                 <?= $this->session->flashdata('pesan'); ?>
-                                <form class="user" method="post" action="<?= base_url('barang/tambah_ap'); ?>">
+                                <form class="user" method="post" action="<?= base_url('barang/tambah_breket'); ?>">
+                                    <input type="hidden" name="id_barang" value="<?= $barang['id']; ?>">
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -39,50 +38,22 @@
                                             </div>
                                             :
                                             <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="jenis_barang" name="jenis_barang" value="AP" readonly>
+                                                <input type="text" class="form-control form-control-sm" id="jenis_barang" name="jenis_barang" value="<?= $barang['nama_barang']; ?>" readonly>
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="merk">Merk Barang</label>
+                                                <label for="jumlah">Jumlah Breket</label>
                                             </div>
                                             :
                                             <div class="col">
-                                                <select class="form-control form-control-sm" id="merk" name="merk">
-                                                    <option></option>
-                                                    <?php foreach ($merk_barang as $m) : ?>
-                                                        <option><?= $m['nama_merk']; ?></option>
-                                                    <?php endforeach; ?>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="form-group form-control-sm">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="sn">Serial Number</label>
-                                            </div>
-                                            :
-                                            <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="sn" name="sn" value="<?= set_value('sn'); ?>">
+                                                <input type="text" class="form-control form-control-sm" id="jumlah" name="jumlah" value="<?= set_value('jumlah'); ?>">
                                             </div>
 
                                         </div>
-                                    </div>
-                                    <div class="form-group form-control-sm">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="mac">MAC Address</label>
-                                            </div>
-                                            :
-                                            <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="mac" name="mac" value="<?= set_value('mac'); ?>">
-                                            </div>
-                                        </div>
-
                                     </div>
                                     <div class="form-group form-control-sm">
                                         <div class="row">
@@ -121,25 +92,3 @@
 
 </div>
 <!-- End of Main Content -->
-
-<!-- Modal -->
-<div class="modal fade" id="pesanKesalahan" tabindex="-1" role="dialog" aria-labelledby="pesanKesalahanTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>

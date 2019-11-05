@@ -55,7 +55,7 @@ class Auth extends CI_Controller
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">NIP anda tidak aktif!</div>');
+                $this->session->set_flashdata('pesan', '<div class="alert alert-danger" role="alert">NIP anda di bekukan!</div>');
                 redirect('auth');
             }
         } else {
@@ -90,5 +90,10 @@ class Auth extends CI_Controller
 
         $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">Kamu berhasil logout!</div>');
         redirect('auth');
+    }
+
+    public function blocked()
+    {
+        $this->load->view('auth/blocked');
     }
 }

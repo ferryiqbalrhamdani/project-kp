@@ -30,8 +30,9 @@
                                 <div class="text-center">
                                     <h4 class="h5 text-gray-900 "><?= $title; ?></h4>
                                 </div>
-                                <?= $this->session->flashdata('pesan'); ?>
-                                <form class="user" method="post" action="<?= base_url('barang/tambah_ap'); ?>">
+
+                                <form class="user" method="post" action="<?= base_url('barang/edit_ap/') . $barang['id']; ?>">
+                                    <input type="hidden" name="id" value="<?= $barang['id']; ?>">
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -51,9 +52,12 @@
                                             :
                                             <div class="col">
                                                 <select class="form-control form-control-sm" id="merk" name="merk">
-                                                    <option></option>
                                                     <?php foreach ($merk_barang as $m) : ?>
-                                                        <option><?= $m['nama_merk']; ?></option>
+                                                        <?php if ($m['nama_merk'] == $barang['merk']) : ?>
+                                                            <option value="<?= $m['nama_merk']; ?>" selected><?= $m['nama_merk']; ?></option>
+                                                        <?php else : ?>
+                                                            <option value="<?= $m['nama_merk']; ?>"><?= $m['nama_merk']; ?></option>
+                                                        <?php endif; ?>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -67,7 +71,7 @@
                                             </div>
                                             :
                                             <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="sn" name="sn" value="<?= set_value('sn'); ?>">
+                                                <input type="text" class="form-control form-control-sm" id="sn" name="sn" value="<?= $barang['sn']; ?>">
                                             </div>
 
                                         </div>
@@ -79,7 +83,7 @@
                                             </div>
                                             :
                                             <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="mac" name="mac" value="<?= set_value('mac'); ?>">
+                                                <input type="text" class="form-control form-control-sm" id="mac" name="mac" value="<?= $barang['mac']; ?>">
                                             </div>
                                         </div>
 
@@ -92,19 +96,24 @@
                                             :
                                             <div class="col">
                                                 <select class="form-control form-control-sm" id="status" name="status">
-                                                    <option>Ready</option>
-                                                    <option>Rusak</option>
+                                                    <?php foreach ($kondisi as $k) : ?>
+                                                        <?php if ($k == $barang['status']) : ?>
+                                                            <option value="<?= $k; ?>" selected><?= $k; ?></option>
+                                                        <?php else : ?>
+                                                            <option value="<?= $k; ?>"><?= $k; ?></option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" name="tambah" class="btn btn-primary btn-user btn-block">
-                                        Tambah Data
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Ubah Data
                                     </button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a href="<?= base_url('barang/tambah') ?>">kembali</a>
+                                    <a href="<?= base_url('barang/ap') ?>">kembali</a>
                                 </div>
                             </div>
                         </div>
@@ -121,25 +130,3 @@
 
 </div>
 <!-- End of Main Content -->
-
-<!-- Modal -->
-<div class="modal fade" id="pesanKesalahan" tabindex="-1" role="dialog" aria-labelledby="pesanKesalahanTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>

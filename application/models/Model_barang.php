@@ -7,49 +7,110 @@ class Model_barang extends CI_Model
         return $this->db->get('barang')->result_array();
     }
 
-    public function tambahDataAp()
+
+
+    // ======================================== Perhitungan ===========================================
+    public function jumlahBarang()
     {
-        $data = [
-            'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
-            'merk' => htmlspecialchars($this->input->post('merk', true)),
-            'sn' => htmlspecialchars($this->input->post('sn', true)),
-            'mac' => htmlspecialchars($this->input->post('mac', true)),
-            'status' => htmlspecialchars($this->input->post('status', true)),
-            'is_active' => 1,
-            'date_created' => time()
-        ];
-        $this->db->insert('barang', $data);
+        $query = $this->db->get('barang');
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
     }
 
-    // jenis barang
-    public function setrules_jenisbarang()
+    public function jumlahBarangRusak()
     {
-        // set rules
-        $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required|trim', [
-            'required' => 'Nama Barang harus diisi!'
-        ]);
+        $query = $this->db->get_where('barang', ['status' => 'Rusak']);
+
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
     }
 
-    public function getAllJenisBarang()
+    public function jumlahAP()
     {
-        return $this->db->get('jenis_barang')->result_array();
+        $query = $this->db->get_where('barang', ['jenis_barang' => 'AP']);
+
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
     }
 
-    public function tambahDataJenisBarang()
+    public function jumlahBarangReady()
     {
-        $data = [
-            'nama_barang' => htmlspecialchars($this->input->post('nama_barang', true)),
-            'date_created' => time()
-        ];
-        $this->db->insert('jenis_barang', $data);
-    }
-    //end jenis barang
+        $query = $this->db->get_where('barang', ['status' => 'Ready']);
 
-    // merk barang
-    public function getAllmerk()
-    {
-        return $this->db->get('merk_barang')->result_array();
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
     }
+
+    // ======================================== AP ===========================================
+
+    public function urutAp()
+    {
+        $this->db->order_by('merk', 'ASC');
+        $query = $this->db->get_where('barang', ['id_barang' => 1]);
+        return $query->result_array();
+    }
+
+    // function get_ap_list()
+    // {
+    //     $query = $this->db->get_where('barang', ['jenis_barang' => 'AP']);
+
+    //     $config['total_rows'] = $this->jumlahAP(); //total row
+    //     $config['per_page'] = 5;
+    //     $config['uri_segment'] = 3;
+    //     $config['num_links'] = 3;
+
+    //     // Style Pagination
+    //     // Agar bisa mengganti stylenya sesuai class2 yg ada di bootstrap
+    //     $config['full_tag_open']   = '<ul class="pagination pagination-sm m-t-xs m-b-xs">';
+    //     $config['full_tag_close']  = '</ul>';
+
+    //     $config['first_link']      = 'First';
+    //     $config['first_tag_open']  = '<li>';
+    //     $config['first_tag_close'] = '</li>';
+
+    //     $config['last_link']       = 'Last';
+    //     $config['last_tag_open']   = '<li>';
+    //     $config['last_tag_close']  = '</li>';
+
+    //     $config['next_link']       = ' <i class="glyphicon glyphicon-menu-right"></i> ';
+    //     $config['next_tag_open']   = '<li>';
+    //     $config['next_tag_close']  = '</li>';
+
+    //     $config['prev_link']       = ' <i class="glyphicon glyphicon-menu-left"></i> ';
+    //     $config['prev_tag_open']   = '<li>';
+    //     $config['prev_tag_close']  = '</li>';
+
+    //     $config['cur_tag_open']    = '<li class="active"><a href="#">';
+    //     $config['cur_tag_close']   = '</a></li>';
+
+    //     $config['num_tag_open']    = '<li>';
+    //     $config['num_tag_close']   = '</li>';
+    //     // End style pagination
+
+    //     $this->pagination->initialize($config); // Set konfigurasi paginationnya
+
+    //     $page = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+    //     $query .= " LIMIT " . $page . ", " . $config['per_page'];
+
+    //     $data['limit'] = $config['per_page'];
+    //     $data['total_rows'] = $config['total_rows'];
+    //     $data['pagination'] = $this->pagination->create_links(); // Generate link pagination nya sesuai config diatas
+    //     $data['siswa'] = $this->db->query($query)->result();
+
+    //     return $data;
+    // }
 
     public function setrules_ap()
     {
@@ -70,6 +131,168 @@ class Model_barang extends CI_Model
         ]);
     }
 
+    public function setrules_ap_edit()
+    {
+        // set rules
+        $this->form_validation->set_rules('merk', 'Merk Barang', 'required|trim', [
+            'required' => 'Merk Barang harus diisi!'
+
+        ]);
+        $this->form_validation->set_rules('sn', 'SN', 'required|trim', [
+            'required' => 'SN harus diisi!'
+
+        ]);
+        $this->form_validation->set_rules('mac', 'MAC', 'required|trim', [
+            'required' => 'MAC harus diisi!'
+
+        ]);
+        $this->form_validation->set_rules('status', 'Status', 'required|trim', [
+            'required' => 'status harus diisi!'
+
+        ]);
+    }
+
+    public function getApById($id)
+    {
+        return $this->db->get_where('barang', ['id' => $id])->row_array();
+    }
+
+    public function getAllmerkAp()
+    {
+        return $this->db->get_where('merk_barang', ['id_barang' => 1])->result_array();
+    }
+
+    public function hapusAp($id)
+    {
+        return $this->db->delete('barang', ['id' => $id]);
+    }
+
+    public function tambahDataAp()
+    {
+        $data = [
+            'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
+            'merk' => htmlspecialchars($this->input->post('merk', true)),
+            'sn' => htmlspecialchars($this->input->post('sn', true)),
+            'mac' => htmlspecialchars($this->input->post('mac', true)),
+            'status' => htmlspecialchars($this->input->post('status', true)),
+            'is_active' => 1,
+            'id_barang' => 1,
+            'date_created' => time()
+        ];
+        $this->db->insert('barang', $data);
+    }
+
+    public function editAp()
+    {
+        $data = [
+            'merk' => htmlspecialchars($this->input->post('merk', true)),
+            'sn' => htmlspecialchars($this->input->post('sn', true)),
+            'mac' => htmlspecialchars($this->input->post('mac', true)),
+            'status' => htmlspecialchars($this->input->post('status', true))
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('barang', $data);
+    }
+
+    // =================================== Brekeet ===================================
+
+    public function getAllBreket()
+    {
+        return $this->db->get_where('barang', ['id_barang' => 2])->result_array();
+    }
+
+    public function hapusBreket($id)
+    {
+        return $this->db->delete('barang', ['id' => $id]);
+    }
+
+    public function setrules_breket()
+    {
+        // set rules
+        $this->form_validation->set_rules('jumlah', 'jumlah', 'required|trim|numeric', [
+            'required' => 'jumlah harus diisi!'
+
+        ]);
+    }
+
+    public function tambahDataBreket()
+    {
+        $data = [
+            'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
+            'merk' => htmlspecialchars($this->input->post('merk', true)),
+            'jumlah' => htmlspecialchars($this->input->post('jumlah', true)),
+            'status' => htmlspecialchars($this->input->post('status', true)),
+            'is_active' => 1,
+            'id_barang' => htmlspecialchars($this->input->post('id_barang', true)),
+            'date_created' => time()
+        ];
+        $this->db->insert('barang', $data);
+    }
+
+
+    // =================================== jenis barang ===================================
+    public function setrules_jenisbarang()
+    {
+        // set rules
+        $this->form_validation->set_rules('nama_barang', 'Nama Barang', 'required|trim', [
+            'required' => 'Nama Barang harus diisi!'
+        ]);
+    }
+
+    public function getJeniBarangId($id)
+    {
+        return $this->db->get_where('jenis_barang', ['id' => $id])->row_array();
+    }
+
+    public function hapusJenisBarang($id)
+    {
+        return $this->db->delete('jenis_barang', ['id' => $id]);
+    }
+
+    public function getAllJenisBarang()
+    {
+        return $this->db->get('jenis_barang')->result_array();
+    }
+
+    public function getAllJenisBarangBreket()
+    {
+        return $this->db->get_where('jenis_barang', ['id' => 2])->row_array();
+    }
+
+    public function tambahDataJenisBarang()
+    {
+        $data = [
+            'nama_barang' => htmlspecialchars($this->input->post('nama_barang', true)),
+            'date_created' => time()
+        ];
+        $this->db->insert('jenis_barang', $data);
+    }
+
+    public function ubahDataJenisBarang()
+    {
+        $data = [
+            'nama_barang' => htmlspecialchars($this->input->post('nama_barang', true))
+        ];
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('jenis_barang', $data);
+    }
+
+    // =================================== merk barang ===================================
+    public function getAllmerk()
+    {
+        return $this->db->get('merk_barang')->result_array();
+    }
+
+    public function getMerkById($id)
+    {
+        return $this->db->get_where('merk_barang', ['id' => $id])->row_array();
+    }
+
+    public function hapusMerkBarang($id)
+    {
+        return $this->db->delete('merk_barang', ['id' => $id]);
+    }
+
     public function tambahDataMerkBarang()
     {
         $data = [
@@ -78,6 +301,17 @@ class Model_barang extends CI_Model
             'date_created' => time()
         ];
         $this->db->insert('merk_barang', $data);
+    }
+
+    public function ubahDataMerkBarang()
+    {
+        $data = [
+            'nama_merk' => htmlspecialchars($this->input->post('nama_merk', true)),
+            'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true))
+        ];
+
+        $this->db->where('id', $this->input->post('id'));
+        $this->db->update('merk_barang', $data);
     }
 
 
