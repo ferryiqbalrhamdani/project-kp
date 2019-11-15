@@ -19,6 +19,9 @@
 
 
                                 <form class="user" method="post" action="<?= base_url('barang/add_merk_barang'); ?>">
+                                    <?php foreach ($jenis_barang as $j) : ?>
+                                        <input type="hidden" name="id_barang" value="<?= $j['id']; ?>">
+                                    <?php endforeach; ?>
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">

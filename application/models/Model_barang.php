@@ -220,10 +220,77 @@ class Model_barang extends CI_Model
         $data = [
             'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
             'merk' => htmlspecialchars($this->input->post('merk', true)),
-            'jumlah' => htmlspecialchars($this->input->post('jumlah', true)),
+            'sn' => htmlspecialchars($this->input->post('sn', true)),
             'status' => htmlspecialchars($this->input->post('status', true)),
             'is_active' => 1,
-            'id_barang' => htmlspecialchars($this->input->post('id_barang', true)),
+            'id_barang' => 5,
+            'date_created' => time()
+        ];
+        $this->db->insert('barang', $data);
+    }
+
+    // =================================== poe ===================================
+
+    public function getAllPoe()
+    {
+        return $this->db->get_where('barang', ['id_barang' => 3])->result_array();
+    }
+
+    public function hapusPoe($id)
+    {
+        return $this->db->delete('barang', ['id' => $id]);
+    }
+
+    public function getAllJenisBarangPoe()
+    {
+        return $this->db->get_where('jenis_barang', ['id' => 3])->row_array();
+    }
+
+    public function getAllMerkPoe()
+    {
+        return $this->db->get_where('merk_barang', ['id' => 3])->result_array();
+    }
+
+    public function setrules_poe()
+    {
+        // set rules
+        $this->form_validation->set_rules('sn', 'SN', 'required|trim|is_unique[barang.sn]', [
+            'required' => 'SN harus diisi!',
+            'is_unique' => 'SN sudah ada!'
+
+        ]);
+        $this->form_validation->set_rules('merk', 'Merk Barang', 'required|trim', [
+            'required' => 'Merk Barang harus diisi!'
+
+        ]);
+    }
+
+    public function setrules_poe_edit()
+    {
+        // set rules
+        $this->form_validation->set_rules('merk', 'Merk Barang', 'required|trim', [
+            'required' => 'Merk Barang harus diisi!'
+
+        ]);
+        $this->form_validation->set_rules('sn', 'SN', 'required|trim', [
+            'required' => 'SN harus diisi!'
+
+        ]);
+        $this->form_validation->set_rules('status', 'Status', 'required|trim', [
+            'required' => 'status harus diisi!'
+
+        ]);
+    }
+
+    public function tambahDataPoe()
+    {
+        $data = [
+            'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
+            'merk' => htmlspecialchars($this->input->post('merk', true)),
+            'sn' => htmlspecialchars($this->input->post('sn', true)),
+            'status' => htmlspecialchars($this->input->post('status', true)),
+            'is_active' => 1,
+            'id_barang' => 2,
             'date_created' => time()
         ];
         $this->db->insert('barang', $data);
@@ -254,10 +321,7 @@ class Model_barang extends CI_Model
         return $this->db->get('jenis_barang')->result_array();
     }
 
-    public function getAllJenisBarangBreket()
-    {
-        return $this->db->get_where('jenis_barang', ['id' => 2])->row_array();
-    }
+
 
     public function tambahDataJenisBarang()
     {
@@ -296,6 +360,7 @@ class Model_barang extends CI_Model
     public function tambahDataMerkBarang()
     {
         $data = [
+            'id_barang' => htmlspecialchars($this->input->post('id_barang', true)),
             'nama_merk' => htmlspecialchars($this->input->post('nama_merk', true)),
             'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
             'date_created' => time()

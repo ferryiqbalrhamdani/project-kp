@@ -322,4 +322,75 @@ class Barang extends CI_Controller
             Data berhasil di hapus.</div>');
         redirect('barang/breket');
     }
+
+    // ========================================== poe ==========================================
+    public function poe()
+    {
+        $data['title'] = 'Daftar Barang';
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+        $data['barang'] = $this->Model_barang->getAllPoe();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('barang/poe/index', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
+    public function tambah_poe()
+    {
+        $data['title'] = 'Tambah Barang';
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+        $data['merk_barang'] = $this->Model_barang->getAllMerkPoe();
+
+        $this->Model_barang->setrules_poe();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('barang/poe/tambah-poe', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $this->Model_barang->tambahDataPoe();
+
+            $this->session->set_flashdata('pesan', '<div class="mt-3 alert alert-success" role="alert">
+            Data baru berhasil di tambahkan.</div>');
+            redirect('barang/poe');
+        }
+    }
+
+    public function edit_poe($id)
+    {
+        $data['title'] = 'Akses Point';
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+        $data['barang'] = $this->Model_barang->getPoeById($id);
+        $data['jenis_barang'] = $this->Model_barang->getAllJenisBarang();
+        $data['merk_barang'] = $this->Model_barang->getAllmerkPoe();
+        $data['kondisi'] = ['Ready', 'Rusak'];
+
+        $this->Model_barang->setrules_poe_edit();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('barang/poe/ubah-poe', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $this->Model_barang->editPoe($id);
+
+            $this->session->set_flashdata('pesan', '<div class="mt-3 alert alert-success" role="alert">
+            Data berhasil di ubah.</div>');
+            redirect('barang/poe');
+        }
+    }
+
+    public function hapus_poe($id)
+    {
+        $this->Model_barang->hapusPoe($id);
+        $this->session->set_flashdata('pesan', '<div class="mt-3 alert alert-success" role="alert">
+            Data berhasil di hapus.</div>');
+        redirect('barang/poe');
+    }
 }
