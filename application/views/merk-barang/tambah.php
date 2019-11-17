@@ -15,13 +15,7 @@
                                 <div class="text-center">
                                     <h4 class="h5 text-gray-900 ">Tambah <?= $title; ?></h4>
                                 </div>
-
-
-
                                 <form class="user" method="post" action="<?= base_url('barang/add_merk_barang'); ?>">
-                                    <?php foreach ($jenis_barang as $j) : ?>
-                                        <input type="hidden" name="id_barang" value="<?= $j['id']; ?>">
-                                    <?php endforeach; ?>
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -44,8 +38,8 @@
                                                 <select class="form-control form-control-sm" id="jenis_barang" name="jenis_barang">
                                                     <option></option>
                                                     <?php foreach ($jenis_barang as $j) : ?>
-                                                        <option><?= $j['nama_barang']; ?></option>
-
+                                                        <option><?= $j['nama_barang']; ?>
+                                                        </option>                                                        
                                                     <?php endforeach; ?>
                                                 </select>
                                                 <?= form_error('jenis_barang', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -63,6 +57,10 @@
                             </div>
                         </div>
                     </div>
+                    <?php if($j['nama_barang']) : ?>
+                        <?= $j['nama_barang']; ?>
+                        <?= $j['id']; ?>
+                    <?php endif; ?>
                 </div>
             </div>
 

@@ -32,30 +32,17 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Nama Barang</th>
                                 <th scope="col">Jumlah</th>
-                                <th scope="col">kondis</th>
-                                <th scope="col">Di Input</th>
-                                <th scope="col" class=" text-center">Aksi</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1; ?>
-                            <?php foreach ($barang as $u) : ?>
-                                <?php if ($u['id_barang'] == 2) : ?>
-                                    <tr>
-                                        <th scope="row"><?= $i; ?></th>
-                                        <td><?= $u['jenis_barang']; ?></td>
-                                        <td><?= $u['jumlah']; ?></td>
-                                        <td><?= $u['status']; ?></td>
-                                        <td><?= date('d F Y', $u['date_created']); ?></td>
-                                        <td class=" text-center">
-                                            <a href="<?= base_url('barang/edit_breket/') . $u['id']; ?>" class="badge badge-success">edit</a>
-                                            <a href="<?= base_url('barang/hapus_breket/') . $u['id']; ?>" class="badge badge-danger tombol-hapus-barang">hapus</a>
-                                        </td>
-                                    </tr>
-                                    <?php $i++; ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Breket</td>
+                                <td><?= $jml_barang; ?></td>
+                                
+                                
+                            </tr>
                         </tbody>
                     </table>
                 </div>

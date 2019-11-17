@@ -30,7 +30,6 @@
                                 </div>
                                 <?= $this->session->flashdata('pesan'); ?>
                                 <form class="user" method="post" action="<?= base_url('barang/tambah_breket'); ?>">
-                                    <input type="hidden" name="id_barang" value="<?= $barang['id']; ?>">
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -53,20 +52,6 @@
                                                 <input type="text" class="form-control form-control-sm" id="jumlah" name="jumlah" value="<?= set_value('jumlah'); ?>">
                                             </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-control-sm">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="status">Status Barang</label>
-                                            </div>
-                                            :
-                                            <div class="col">
-                                                <select class="form-control form-control-sm" id="status" name="status">
-                                                    <option>Ready</option>
-                                                    <option>Rusak</option>
-                                                </select>
-                                            </div>
                                         </div>
                                     </div>
                                     <button type="submit" name="tambah" class="btn btn-primary btn-user btn-block">

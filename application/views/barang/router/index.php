@@ -25,7 +25,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            Akses Point
+                            Router
                         </div>
                         <div class="col">
                             <a href="<?= base_url('barang/'); ?>">
@@ -43,6 +43,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Merk Barang</th>
                                 <th scope="col">SN</th>
+                                <th scope="col">MAC</th>
                                 <th scope="col">Kondisi</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Di Input</th>
@@ -53,11 +54,12 @@
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($barang as $u) : ?>
-                                <?php if ($u['id_barang'] == 2) : ?>
+                                <?php if ($u['id_barang'] == 3) : ?>
                                     <tr>
                                         <th scope="row"><?= $i; ?></th>
                                         <td><?= $u['merk']; ?></td>
                                         <td><?= $u['sn']; ?></td>
+                                        <td><?= $u['mac']; ?></td>
                                         <td><?= $u['status']; ?></td>
                                         <td>
                                             <?php if ($u['is_active'] == 1) : ?>
@@ -68,8 +70,8 @@
                                         </td>
                                         <td><?= date('d F Y', $u['date_created']); ?></td>
                                         <td class=" text-center">
-                                            <a href="<?= base_url('barang/edit_poe/') . $u['id']; ?>" class="badge badge-success">edit</a>
-                                            <a href="<?= base_url('barang/hapus_poe/') . $u['id']; ?>" class="badge badge-danger tombol-hapus-barang">hapus</a>
+                                            <a href="<?= base_url('barang/edit_router/') . $u['id']; ?>" class="badge badge-success">edit</a>
+                                            <a href="<?= base_url('barang/hapus_router/') . $u['id']; ?>" class="badge badge-danger tombol-hapus-barang">hapus</a>
                                         </td>
                                     </tr>
                                     <?php $i++; ?>

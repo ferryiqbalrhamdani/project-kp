@@ -42,6 +42,17 @@ class Model_barang extends CI_Model
         }
     }
 
+    public function jumlahBreket()
+    {
+        $query = $this->db->get_where('barang', ['id_barang' => 4]);
+
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
     public function jumlahBarangReady()
     {
         $query = $this->db->get_where('barang', ['status' => 'Ready']);
@@ -198,7 +209,12 @@ class Model_barang extends CI_Model
 
     public function getAllBreket()
     {
-        return $this->db->get_where('barang', ['id_barang' => 2])->result_array();
+        return $this->db->get_where('barang', ['id_barang' => 4])->result_array();
+    }
+
+    public function getAllJenisBarangBreket()
+    {
+        return $this->db->get_where('jenis_barang', ['id' => 4])->result_array();
     }
 
     public function hapusBreket($id)
@@ -210,30 +226,31 @@ class Model_barang extends CI_Model
     {
         // set rules
         $this->form_validation->set_rules('jumlah', 'jumlah', 'required|trim|numeric', [
-            'required' => 'jumlah harus diisi!'
+            'required' => 'jumlah harus diisi!',
+            'numeric' => 'Harus Berupa Angka'
 
         ]);
     }
 
     public function tambahDataBreket()
     {
-        $data = [
-            'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
-            'merk' => htmlspecialchars($this->input->post('merk', true)),
-            'sn' => htmlspecialchars($this->input->post('sn', true)),
-            'status' => htmlspecialchars($this->input->post('status', true)),
-            'is_active' => 1,
-            'id_barang' => 5,
-            'date_created' => time()
-        ];
-        $this->db->insert('barang', $data);
+        for($i=0; $i<$this->input->post('jumlah'); $i++) {
+            $data = [
+                'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
+                'status' => 'Ready',
+                'is_active' => 1,
+                'id_barang' => 4,
+                'date_created' => time()
+            ];
+            $this->db->insert('barang', $data);
+        }
     }
 
     // =================================== poe ===================================
 
     public function getAllPoe()
     {
-        return $this->db->get_where('barang', ['id_barang' => 3])->result_array();
+        return $this->db->get_where('barang', ['id_barang' => 2])->result_array();
     }
 
     public function hapusPoe($id)
@@ -243,12 +260,12 @@ class Model_barang extends CI_Model
 
     public function getAllJenisBarangPoe()
     {
-        return $this->db->get_where('jenis_barang', ['id' => 3])->row_array();
+        return $this->db->get_where('jenis_barang', ['id' => 2])->row_array();
     }
 
     public function getAllMerkPoe()
     {
-        return $this->db->get_where('merk_barang', ['id' => 3])->result_array();
+        return $this->db->get_where('merk_barang', ['id_barang' => 2])->result_array();
     }
 
     public function setrules_poe()
@@ -390,4 +407,95 @@ class Model_barang extends CI_Model
             'required' => 'Jenis Barang harus diisi!'
         ]);
     }
+
+     // ======================================== ROUTER ===========================================
+
+     public function urutRouter()
+     {
+         $this->db->order_by('merk', 'ASC');
+         $query = $this->db->get_where('barang', ['id_barang' => 3]);
+         return $query->result_array();
+     }
+
+     public function setrules_router()
+     {
+         // set rules
+         $this->form_validation->set_rules('sn', 'SN', 'required|trim|is_unique[barang.sn]', [
+             'required' => 'SN harus diisi!',
+             'is_unique' => 'SN sudah ada!'
+ 
+         ]);
+         $this->form_validation->set_rules('mac', 'MAC', 'required|trim|is_unique[barang.mac]', [
+             'required' => 'MAC harus diisi!',
+             'is_unique' => 'MAC sudah ada!'
+ 
+         ]);
+         $this->form_validation->set_rules('merk', 'Merk Barang', 'required|trim', [
+             'required' => 'Merk Barang harus diisi!'
+ 
+         ]);
+     }
+ 
+     public function setrules_router_edit()
+     {
+         // set rules
+         $this->form_validation->set_rules('merk', 'Merk Barang', 'required|trim', [
+             'required' => 'Merk Barang harus diisi!'
+ 
+         ]);
+         $this->form_validation->set_rules('sn', 'SN', 'required|trim', [
+             'required' => 'SN harus diisi!'
+ 
+         ]);
+         $this->form_validation->set_rules('mac', 'MAC', 'required|trim', [
+             'required' => 'MAC harus diisi!'
+ 
+         ]);
+         $this->form_validation->set_rules('status', 'Status', 'required|trim', [
+             'required' => 'status harus diisi!'
+ 
+         ]);
+     }
+ 
+     public function getRouterById($id)
+     {
+         return $this->db->get_where('barang', ['id' => $id])->row_array();
+     }
+ 
+     public function getAllmerkRouter()
+     {
+         return $this->db->get_where('merk_barang', ['id_barang' => 3])->result_array();
+     }
+ 
+     public function hapusRouter($id)
+     {
+         return $this->db->delete('barang', ['id' => $id]);
+     }
+ 
+     public function tambahDataRouter()
+     {
+         $data = [
+             'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
+             'merk' => htmlspecialchars($this->input->post('merk', true)),
+             'sn' => htmlspecialchars($this->input->post('sn', true)),
+             'mac' => htmlspecialchars($this->input->post('mac', true)),
+             'status' => htmlspecialchars($this->input->post('status', true)),
+             'is_active' => 1,
+             'id_barang' => 3,
+             'date_created' => time()
+         ];
+         $this->db->insert('barang', $data);
+     }
+ 
+     public function editRouter()
+     {
+         $data = [
+             'merk' => htmlspecialchars($this->input->post('merk', true)),
+             'sn' => htmlspecialchars($this->input->post('sn', true)),
+             'mac' => htmlspecialchars($this->input->post('mac', true)),
+             'status' => htmlspecialchars($this->input->post('status', true))
+         ];
+         $this->db->where('id', $this->input->post('id'));
+         $this->db->update('barang', $data);
+     }
 }

@@ -258,6 +258,7 @@ class Barang extends CI_Controller
         $data['title'] = 'Daftar Barang';
         $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
         $data['barang'] = $this->Model_barang->getAllBreket();
+        $data['jml_barang'] = $this->Model_barang->jumlahBreket();
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
@@ -392,5 +393,79 @@ class Barang extends CI_Controller
         $this->session->set_flashdata('pesan', '<div class="mt-3 alert alert-success" role="alert">
             Data berhasil di hapus.</div>');
         redirect('barang/poe');
+    }
+
+    // ========================================== Router ==========================================
+    public function router()
+    {
+        $data['title'] = 'Daftar Barang';
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+        $data['barang'] = $this->Model_barang->urutRouter();
+
+        // $data['router'] = $this->Model_barang->get_router_list();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('barang/router/index', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
+    public function tambah_router()
+    {
+        $data['title'] = 'Tambah Barang';
+        $data['jenis_barang'] = $this->Model_barang->getAllJenisBarang();
+        $data['merk_barang'] = $this->Model_barang->getAllmerkRouter();
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+
+        $this->Model_barang->setrules_router();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('barang/router/tambah-router', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $this->Model_barang->tambahDataRouter();
+
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+            Data baru berhasil di tambahkan.</div>');
+            redirect('barang/tambah_router');
+        }
+    }
+
+    public function edit_router($id)
+    {
+        $data['title'] = 'Daftar Barang';
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+        $data['barang'] = $this->Model_barang->getRouterById($id);
+        $data['jenis_barang'] = $this->Model_barang->getAllJenisBarang();
+        $data['merk_barang'] = $this->Model_barang->getAllmerkRouter();
+        $data['kondisi'] = ['Ready', 'Rusak'];
+
+        $this->Model_barang->setrules_router_edit();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('barang/router/ubah-router', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $this->Model_barang->editrouter($id);
+
+            $this->session->set_flashdata('pesan', '<div class="mt-3 alert alert-success" role="alert">
+            Data berhasil di ubah.</div>');
+            redirect('barang/router');
+        }
+    }
+
+    public function hapus_router($id)
+    {
+        $this->Model_barang->hapusRouter($id);
+        $this->session->set_flashdata('pesan', '<div class="mt-2 alert alert-success" role="alert">
+            Data berhasil di hapus.</div>');
+        redirect('barang/router');
     }
 }
