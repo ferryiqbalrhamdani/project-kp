@@ -49,6 +49,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group form-control-sm">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="nama_merk">ID Barang</label>
+                                            </div>
+                                            :
+                                            <div class="col">
+                                                <input type="text" class="form-control form-control-sm" id="id_barang" name="id_barang" value="<?= $merk['id_barang']; ?>">
+                                                <?= form_error('id_barang', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Ubah Data
                                     </button>

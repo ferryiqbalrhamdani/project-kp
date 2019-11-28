@@ -217,10 +217,10 @@ class Model_barang extends CI_Model
         return $this->db->get_where('jenis_barang', ['id' => 4])->result_array();
     }
 
-    public function hapusBreket($id)
-    {
-        return $this->db->delete('barang', ['id' => $id]);
-    }
+    // public function hapusBreket($id)
+    // {
+    //     return $this->db->delete('barang', ['id' => $id]);
+    // }
 
     public function setrules_breket()
     {
@@ -243,6 +243,13 @@ class Model_barang extends CI_Model
                 'date_created' => time()
             ];
             $this->db->insert('barang', $data);
+        }
+    }
+
+    public function hapusBreket()
+    {
+        for($i=0; $i<$this->input->post('jumlah'); $i++) {
+            $this->db->delete('barang', ['jenis_barang' => 'Breket']);
         }
     }
 
@@ -364,6 +371,13 @@ class Model_barang extends CI_Model
         return $this->db->get('merk_barang')->result_array();
     }
 
+    public function urutMerk()
+     {
+         $this->db->order_by('jenis_barang', 'ASC');
+         $query = $this->db->get('merk_barang');
+         return $query->result_array();
+     }
+
     public function getMerkById($id)
     {
         return $this->db->get_where('merk_barang', ['id' => $id])->row_array();
@@ -389,7 +403,8 @@ class Model_barang extends CI_Model
     {
         $data = [
             'nama_merk' => htmlspecialchars($this->input->post('nama_merk', true)),
-            'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true))
+            'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
+            'id_barang' => htmlspecialchars($this->input->post('id_barang', true))
         ];
 
         $this->db->where('id', $this->input->post('id'));
@@ -405,6 +420,10 @@ class Model_barang extends CI_Model
         ]);
         $this->form_validation->set_rules('jenis_barang', 'Jenis Barang', 'required|trim', [
             'required' => 'Jenis Barang harus diisi!'
+        ]);
+        $this->form_validation->set_rules('id_barang', 'Jenis Barang', 'required|trim|numeric', [
+            'required' => 'Jenis Barang harus diisi!',
+            'numeric' => 'Harus Berupa Angka!'
         ]);
     }
 

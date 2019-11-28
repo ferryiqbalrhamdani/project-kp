@@ -32,6 +32,7 @@
                                 <th scope="col">#</th>
                                 <th scope="col">Nama Barang</th>
                                 <th scope="col">Jumlah</th>
+                                <th scope="col">Aksi</th>
 
                             </tr>
                         </thead>
@@ -39,9 +40,10 @@
                             <tr>
                                 <th scope="row">1</th>
                                 <td>Breket</td>
-                                <td><?= $jml_barang; ?></td>
-                                
-                                
+                                <td><?= $jml_barang; ?></td>                      
+                                <td>
+                                    <a href="<?= base_url('barang/hapus_breket'); ?>" class="badge badge-danger">hapus</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

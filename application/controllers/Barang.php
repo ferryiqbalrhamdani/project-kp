@@ -111,8 +111,7 @@ class Barang extends CI_Controller
     public function merk_barang()
     {
         $data['title'] = 'Merk Barang';
-        $data['jenis_barang'] = $this->Model_barang->getAllJenisBarang();
-        $data['merk_barang'] = $this->Model_barang->getAllmerk();
+        $data['merk_barang'] = $this->Model_barang->urutMerk();
         $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
 
 
@@ -316,12 +315,27 @@ class Barang extends CI_Controller
         }
     }
 
-    public function hapus_breket($id)
+    public function hapus_breket()
     {
-        $this->Model_barang->hapusBreket($id);
-        $this->session->set_flashdata('pesan', '<div class="mt-3 alert alert-success" role="alert">
-            Data berhasil di hapus.</div>');
-        redirect('barang/breket');
+        $data['title'] = 'Tambah Barang';
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+        $data['barang'] = $this->Model_barang->getAllJenisBarangBreket();
+
+        $this->Model_barang->setrules_breket();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('barang/breket/hapus-breket', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $this->Model_barang->hapusBreket();
+
+            $this->session->set_flashdata('pesan', '<div class="mt-3 alert alert-success" role="alert">
+            Data baru berhasil di hapus.</div>');
+            redirect('barang/breket');
+        }
     }
 
     // ========================================== poe ==========================================
