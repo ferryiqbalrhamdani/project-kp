@@ -7,11 +7,11 @@
         <a href="<?= base_url('cetak/cetakAP'); ?>" class="d-none d-sm-inline-block btn btn-sm btn-danger shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Download Data</a>
     </div>
     <!-- Topbar Search -->
-    <form class="d-none d-sm-inline-block form-inline navbar-search">
+    <form class="d-none d-sm-inline-block form-inline navbar-search" method="post">
         <div class="input-group">
-            <input type="text" class="form-control bg-with border-5 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            <input type="text" class="form-control bg-with border-5 small" placeholder="Search for..." name="cari" id="cari">
             <div class="input-group-append">
-                <button class="btn btn-danger" type="button">
+                <button class="btn btn-danger" type="submit">
                     <i class="fas fa-search fa-sm"></i>
                 </button>
             </div>
@@ -33,10 +33,16 @@
                             </a>
 
                         </div>
-                    </div>
+                
 
                 </div>
                 <div class="card-body table-responsive">
+                <?php if (empty($c_barang)) : ?>
+                        <div class="alert alert-danger mt-3" role="alert">
+                            Data Not Found!
+                        </div>
+                    </div>
+                <?php else : ?>
                     <table class="table table-hover table-sm">
                         <thead>
                             <tr>
@@ -48,7 +54,7 @@
                                 <th scope="col">Status</th>
                                 <th scope="col">Di Input</th>
                                 <th scope="col" class=" text-center">Aksi</th>
-
+                            <?php endif; ?>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,24 +85,6 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            <li class="page-item disabled">
-                                <span class="page-link">Previous</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active" aria-current="page">
-                                <span class="page-link">
-                                    2
-                                    <span class="sr-only">(current)</span>
-                                </span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>

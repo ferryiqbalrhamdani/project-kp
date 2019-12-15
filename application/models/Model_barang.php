@@ -33,7 +33,29 @@ class Model_barang extends CI_Model
 
     public function jumlahAP()
     {
-        $query = $this->db->get_where('barang', ['jenis_barang' => 'AP']);
+        $query = $this->db->get_where('barang', ['id_barang' => 1]);
+
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    public function jumlahPOE()
+    {
+        $query = $this->db->get_where('barang', ['id_barang' => 2]);
+
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
+    public function jumlahRouter()
+    {
+        $query = $this->db->get_where('barang', ['id_barang' => 3]);
 
         if ($query->num_rows() > 0) {
             return $query->num_rows();
@@ -71,6 +93,18 @@ class Model_barang extends CI_Model
         $this->db->order_by('merk', 'ASC');
         $query = $this->db->get_where('barang', ['id_barang' => 1]);
         return $query->result_array();
+    }
+
+    public function getAllAP()
+    {
+        return $this->db->get_where('barang', ['id_barang' => 1])->result_array();
+    }
+
+    public function CariAP()
+    {
+        $cari = $this->input->post('cari', true);
+        $this->db->like('sn', $cari);
+        return $this->db->get_where('barang', ['id_barang' => 1])->result_array();
     }
 
     // function get_ap_list()

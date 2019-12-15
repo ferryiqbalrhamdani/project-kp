@@ -30,6 +30,8 @@ class Cetak extends CI_Controller
         $pdf->Cell(25, 6, 'Kondisi', 1, 0);
         $pdf->Cell(35, 6, 'Di Input', 1, 1);
         $pdf->SetFont('Arial', '', 10);
+        
+        $this->db->order_by('merk', 'ASC');
         $barang = $this->db->get_where('barang', ['id_barang'=>1])->result();
         $i = 1;
         foreach ($barang as $row) {
@@ -90,7 +92,7 @@ class Cetak extends CI_Controller
         // mencetak string 
         $pdf->Cell(190, 7, 'TELKOM AKSES', 0, 1, 'C');
         $pdf->SetFont('Arial', 'B', 12);
-        $pdf->Cell(190, 7, 'DAFTAR BARANG POE', 0, 1, 'C');
+        $pdf->Cell(190, 7, 'DAFTAR BARANG ROUTER', 0, 1, 'C');
         // Memberikan space kebawah agar tidak terlalu rapat
         $pdf->Cell(10, 7, '', 0, 1);
         $pdf->SetFont('Arial', 'B', 10);

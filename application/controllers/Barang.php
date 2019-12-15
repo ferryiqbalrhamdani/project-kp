@@ -183,8 +183,13 @@ class Barang extends CI_Controller
         $data['title'] = 'Daftar Barang';
         $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
         $data['barang'] = $this->Model_barang->urutAp();
+        $data['c_barang'] = $this->Model_barang->getAllAP();
 
         // $data['ap'] = $this->Model_barang->get_ap_list();
+
+        if ($this->input->post('cari')) {
+            $data['c_barang'] = $this->Model_barang->CariAP();
+        }
 
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);

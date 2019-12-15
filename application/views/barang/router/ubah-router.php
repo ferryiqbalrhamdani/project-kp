@@ -40,7 +40,7 @@
                                             </div>
                                             :
                                             <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="jenis_barang" name="jenis_barang" value="AP" readonly>
+                                                <input type="text" class="form-control form-control-sm" id="jenis_barang" name="jenis_barang" value="ROUTER" readonly>
                                             </div>
                                         </div>
                                     </div>

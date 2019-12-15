@@ -17,6 +17,9 @@ class User extends CI_Controller
         $data['users'] = $this->User_model->jumlahUser();
         $data['barang'] = $this->Model_barang->getAllJenisBarang();
         $data['ap'] = $this->Model_barang->jumlahAP();
+        $data['poe'] = $this->Model_barang->jumlahPOE();
+        $data['router'] = $this->Model_barang->jumlahRouter();
+        $data['breket'] = $this->Model_barang->jumlahBreket();
         $data['jumlah_barang'] = $this->Model_barang->jumlahBarang();
         $data['jumlahBarangRusak'] = $this->Model_barang->jumlahBarangRusak();
         $data['jumlahBarangReady'] = $this->Model_barang->jumlahBarangReady();
