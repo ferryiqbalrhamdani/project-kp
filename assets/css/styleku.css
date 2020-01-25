@@ -5,3 +5,22 @@
 .logo {
     width: 255px;
 }
+
+.warna-telkom-hover {
+    background-color: #fff;
+    
+}
+
+.warna-telkom-hover:hover {
+    background-color: #cf3f3f;
+}
+
+.text-telkom-hover {
+    color: black;
+    
+}
+
+.text-telkom-hover:hover {
+    color: white;
+    
+}

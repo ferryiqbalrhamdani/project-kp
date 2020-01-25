@@ -19,7 +19,7 @@
     </form>
     <?= $this->session->flashdata('pesan'); ?>
     <!-- Content Row -->
-    <div class="row mt-3">
+    <div class="row mt-3 ">
         <div class="col">
             <div class="card o-hidden border-0 shadow-lg">
                 <div class="card-header">
@@ -31,10 +31,7 @@
                             <a href="<?= base_url('barang/'); ?>">
                                 <p class="text-right">Kembali</p>
                             </a>
-
-                        </div>
-                
-
+                        </div>          
                 </div>
                 <div class="card-body table-responsive">
                 <?php if (empty($c_barang)) : ?>
