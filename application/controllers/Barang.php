@@ -382,7 +382,7 @@ class Barang extends CI_Controller
 
     public function edit_poe($id)
     {
-        $data['title'] = 'Akses Point';
+        $data['title'] = 'POE';
         $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
         $data['barang'] = $this->Model_barang->getPoeById($id);
         $data['jenis_barang'] = $this->Model_barang->getAllJenisBarang();
@@ -486,5 +486,80 @@ class Barang extends CI_Controller
         $this->session->set_flashdata('pesan', '<div class="mt-2 alert alert-success" role="alert">
             Data berhasil di hapus.</div>');
         redirect('barang/router');
+    }
+
+     // ========================================== Kabel ==========================================
+    public function kabel()
+    {
+        $data['title'] = 'Daftar Barang';
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+        $data['barang'] = $this->Model_barang->urutKabel();
+
+        // $data['router'] = $this->Model_barang->get_router_list();
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('barang/kabel/index', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
+    public function tambah_kabel()
+    {
+        $data['title'] = 'Tambah Barang';
+        $data['jenis_barang'] = $this->Model_barang->getAllJenisBarang();
+        $data['merk_barang'] = $this->Model_barang->getAllmerkKabel();
+        $data['satuan_kaabel'] = $this->Model_barang->getAllSatuanKabel();
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+
+        $this->Model_barang->setrules_kabel();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('barang/kabel/tambah-kabel', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $this->Model_barang->tambahDataKabel();
+
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success" role="alert">
+            Data baru berhasil di tambahkan.</div>');
+            redirect('barang/tambah_kabel');
+        }
+    }
+
+    public function edit_kabel($id)
+    {
+        $data['title'] = 'Daftar Barang';
+        $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
+        $data['barang'] = $this->Model_barang->getKabelById($id);
+        $data['jenis_barang'] = $this->Model_barang->getAllJenisBarang();
+        $data['merk_barang'] = $this->Model_barang->getAllmerkKabel();
+        $data['satuan_kaabel'] = $this->Model_barang->getAllSatuanKabel();
+
+        $this->Model_barang->setrules_kabel();
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('barang/kabel/ubah-kabel', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $this->Model_barang->editKabel($id);
+
+            $this->session->set_flashdata('pesan', '<div class="mt-3 alert alert-success" role="alert">
+            Data berhasil di ubah.</div>');
+            redirect('barang/kabel');
+        }
+    }
+
+    public function hapus_kabel($id)
+    {
+        $this->Model_barang->hapusKabel($id);
+        $this->session->set_flashdata('pesan', '<div class="mt-2 alert alert-success" role="alert">
+            Data berhasil di hapus.</div>');
+        redirect('barang/kabel');
     }
 }

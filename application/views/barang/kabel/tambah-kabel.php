@@ -6,7 +6,7 @@
 
         <div class="col-lg-7">
 
-            <?php if (form_error('merk', 'sn')) : ?>
+            <?php if (form_error('merk', 'panjang')) : ?>
                 <div class="row">
                     <div class="col-md-4">
                         Pesan Kesalahan
@@ -14,7 +14,7 @@
                     :
                     <div class="col">
                         <?= form_error('merk', '<small class="text-danger pl-3">', '</small>'); ?>
-                        <?= form_error('sn', '<small class="text-danger pl-3">', '</small>'); ?>
+                        <?= form_error('panjang', '<small class="text-danger pl-3">', '</small>'); ?>
                     </div>
                 </div>
 
@@ -29,9 +29,8 @@
                                 <div class="text-center">
                                     <h4 class="h5 text-gray-900 "><?= $title; ?></h4>
                                 </div>
-
-                                <form class="user" method="post" action="<?= base_url('barang/edit_poe/') . $barang['id']; ?>">
-                                    <input type="hidden" name="id" value="<?= $barang['id']; ?>">
+                                <?= $this->session->flashdata('pesan'); ?>
+                                <form class="user" method="post" action="<?= base_url('barang/tambah_kabel'); ?>">
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
@@ -39,7 +38,7 @@
                                             </div>
                                             :
                                             <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="jenis_barang" name="jenis_barang" value="POE" readonly>
+                                                <input type="text" class="form-control form-control-sm" id="jenis_barang" name="jenis_barang" value="Kabel" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -51,12 +50,9 @@
                                             :
                                             <div class="col">
                                                 <select class="form-control form-control-sm" id="merk" name="merk">
+                                                    <option></option>
                                                     <?php foreach ($merk_barang as $m) : ?>
-                                                        <?php if ($m['nama_merk'] == $barang['merk']) : ?>
-                                                            <option value="<?= $m['nama_merk']; ?>" selected><?= $m['nama_merk']; ?></option>
-                                                        <?php else : ?>
-                                                            <option value="<?= $m['nama_merk']; ?>"><?= $m['nama_merk']; ?></option>
-                                                        <?php endif; ?>
+                                                        <option><?= $m['nama_merk']; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
@@ -66,41 +62,30 @@
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="sn">Serial Number</label>
+                                                <label for="panjang">Panjang Kabel</label>
                                             </div>
                                             :
                                             <div class="col">
-                                                <input type="text" class="form-control form-control-sm" id="sn" name="sn" value="<?= $barang['sn']; ?>">
+                                                <input type="text" class="form-control form-control-sm" id="panjang" name="panjang" value="<?= set_value('panjang'); ?>">
                                             </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-control-sm">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <label for="status">Status Barang</label>
-                                            </div>
-                                            :
                                             <div class="col">
-                                                <select class="form-control form-control-sm" id="status" name="status">
-                                                    <?php foreach ($kondisi as $k) : ?>
-                                                        <?php if ($k == $barang['status']) : ?>
-                                                            <option value="<?= $k; ?>" selected><?= $k; ?></option>
-                                                        <?php else : ?>
-                                                            <option value="<?= $k; ?>"><?= $k; ?></option>
-                                                        <?php endif; ?>
+                                                <select class="form-control form-control-sm" id="satuan" name="satuan" placeholder="hallo">
+                                                    <option></option>
+                                                    <?php foreach ($satuan_kaabel as $s) : ?>
+                                                        <option><?= $s['sekala']; ?></option>
                                                     <?php endforeach; ?>
                                                 </select>
                                             </div>
                                         </div>
+
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Ubah Data
+                                    <button type="submit" name="tambah" class="btn btn-primary btn-user btn-block">
+                                        Tambah Data
                                     </button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a href="<?= base_url('barang/poe') ?>">kembali</a>
+                                    <a href="<?= base_url('barang/tambah') ?>">kembali</a>
                                 </div>
                             </div>
                         </div>
@@ -117,3 +102,25 @@
 
 </div>
 <!-- End of Main Content -->
+
+<!-- Modal -->
+<div class="modal fade" id="pesanKesalahan" tabindex="-1" role="dialog" aria-labelledby="pesanKesalahanTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

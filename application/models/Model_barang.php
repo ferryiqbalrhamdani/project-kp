@@ -294,6 +294,11 @@ class Model_barang extends CI_Model
         return $this->db->get_where('barang', ['id_barang' => 2])->result_array();
     }
 
+    public function getPoeById($id)
+    {
+        return $this->db->get_where('barang', ['id' => $id])->row_array();
+    }
+
     public function hapusPoe($id)
     {
         return $this->db->delete('barang', ['id' => $id]);
@@ -547,6 +552,79 @@ class Model_barang extends CI_Model
              'sn' => htmlspecialchars($this->input->post('sn', true)),
              'mac' => htmlspecialchars($this->input->post('mac', true)),
              'status' => htmlspecialchars($this->input->post('status', true))
+         ];
+         $this->db->where('id', $this->input->post('id'));
+         $this->db->update('barang', $data);
+     }
+
+
+     // ======================================== KABEL ===========================================
+
+     public function urutKabel()
+     {
+         $this->db->order_by('merk', 'ASC');
+         $query = $this->db->get_where('barang', ['id_barang' => 5]);
+         return $query->result_array();
+     }
+
+     public function setrules_kabel()
+     {
+         // set rules
+         $this->form_validation->set_rules('panjang', 'Panjang Kabel', 'required|numeric|trim', [
+             'required' => 'Panjang Kabel harus diisi!',
+             'numeric' => 'Panjang Kabel harus berupa angka'
+ 
+         ]);
+         $this->form_validation->set_rules('merk', 'Merk Barang', 'required|trim', [
+             'required' => 'Merk Barang harus diisi!'
+ 
+         ]);
+         $this->form_validation->set_rules('satuan', 'Satuan Panjang', 'required|trim', [
+             'required' => 'Satuan Panjang harus diisi!'
+ 
+         ]);
+     }
+ 
+     public function getKabelById($id)
+     {
+         return $this->db->get_where('barang', ['id' => $id])->row_array();
+     }
+ 
+     public function getAllmerkKabel()
+     {
+         return $this->db->get_where('merk_barang', ['id_barang' => 5])->result_array();
+     }
+
+     public function getAllSatuanKabel()
+     {
+         return $this->db->get('satuan')->result_array();
+     }
+ 
+     public function hapusKabel($id)
+     {
+         return $this->db->delete('barang', ['id' => $id]);
+     }
+ 
+     public function tambahDataKabel()
+     {
+         $data = [
+             'jenis_barang' => htmlspecialchars($this->input->post('jenis_barang', true)),
+             'merk' => htmlspecialchars($this->input->post('merk', true)),
+             'panjang' => htmlspecialchars($this->input->post('panjang', true)),
+             'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+             'is_active' => 1,
+             'id_barang' => 5,
+             'date_created' => time()
+         ];
+         $this->db->insert('barang', $data);
+     }
+ 
+     public function editKabel()
+     {
+         $data = [
+             'merk' => htmlspecialchars($this->input->post('merk', true)),
+             'satuan' => htmlspecialchars($this->input->post('satuan', true)),
+             'panjang' => htmlspecialchars($this->input->post('panjang', true))
          ];
          $this->db->where('id', $this->input->post('id'));
          $this->db->update('barang', $data);

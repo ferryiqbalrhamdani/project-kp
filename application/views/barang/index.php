@@ -13,10 +13,10 @@
                     <!-- Content Row -->
                     <div class="row mt-3 justify-content-center">
                         <div class="col-md-6 ">
-                            <ul class="list-group  ">
+                            <ul class="list-group">
                                 <?php foreach ($barang as $b) : ?>
-                                    <a href="<?= base_url('barang/') . $b['nama_barang']; ?>" style="text-decoration:none">
-                                    <li class="list-group-item btn warna-telkom-hover text-telkom-hover ">
+                                    <a href="<?= base_url('barang/') . $b['nama_barang']; ?>" class="" style="text-decoration:none">
+                                    <li class="list-group-item btn warna-telkom-hover text-telkom-hover">
                                         <?= $b['nama_barang']; ?>
                                     </li>
                                     </a>
