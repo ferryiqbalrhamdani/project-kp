@@ -75,6 +75,17 @@ class Model_barang extends CI_Model
         }
     }
 
+    public function jumlahKabel()
+    {
+        $query = $this->db->get_where('barang', ['id_barang' => 5]);
+
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
+
     public function jumlahBarangReady()
     {
         $query = $this->db->get_where('barang', ['status' => 'Ready']);
