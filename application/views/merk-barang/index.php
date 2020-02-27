@@ -23,8 +23,8 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nama Merk Barang</th>
                                 <th scope="col">Jenis Barang</th>
+                                <th scope="col">Nama Merk Barang</th>
                                 <th scope="col">Dibuat</th>
                                 <th scope="col">Aksi</th>
 
@@ -35,8 +35,8 @@
                             <?php foreach ($merk_barang as $j) : ?>
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
-                                    <td><?= $j['nama_merk']; ?></td>
                                     <td><?= $j['jenis_barang']; ?></td>
+                                    <td><?= $j['nama_merk']; ?></td>
                                     <td><?= date('d F Y', $j['date_created']); ?></td>
                                     <td>
                                         <a href="<?= base_url('barang/editMerk/') . $j['id'] ?>" class="badge badge-success">edit</a>

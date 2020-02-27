@@ -82,9 +82,9 @@ class Cetak extends CI_Controller
             $i++;
         }
         $pdf->Cell(10, 7, '', 0, 1);
-        
+        date_default_timezone_set('Asia/Jakarta');
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(190, 7, 'Di Download : ' .date('d/m/Y'), 0, 1, 'R');
+        $pdf->Cell(190, 7, 'Di Download : ' .date('d/m/Y H:i:s'), 0, 1, 'R');
         $pdf->Output();
     }
 
@@ -121,9 +121,44 @@ class Cetak extends CI_Controller
             $i++;
         }
         $pdf->Cell(10, 7, '', 0, 1);
-        
+        date_default_timezone_set('Asia/Jakarta');
         $pdf->SetFont('Arial', '', 10);
-        $pdf->Cell(190, 7, 'Di Download : ' .date('d/m/Y'), 0, 1, 'R');
+        $pdf->Cell(190, 7, 'Di Download : ' .date('d/m/Y H:i:s'), 0, 1, 'R');
+        $pdf->Output();
+    }
+
+    function cetakKabel()
+    {
+        $pdf = new FPDF('p', 'mm', 'A4');
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial', 'B', 16);
+        // mencetak string 
+        $pdf->Cell(190, 7, 'TELKOM AKSES', 0, 1, 'C');
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(190, 7, 'DAFTAR BARANG KABEL', 0, 1, 'C');
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->Cell(10, 7, '', 0, 1);
+        $pdf->SetFont('Arial', 'B', 10);
+        $pdf->Cell(10, 6, 'No', 1, 0);
+        $pdf->Cell(25, 6, 'Merk Barang', 1, 0);
+        $pdf->Cell(27, 6, 'Panjang Kabel', 1, 0);
+        $pdf->Cell(35, 6, 'Di Input', 1, 1);
+        $pdf->SetFont('Arial', '', 10);
+        $barang = $this->db->get_where('barang', ['id_barang'=>5])->result();
+        $i = 1;
+        foreach ($barang as $row) {
+            $pdf->Cell(10, 6, $i, 1, 0);
+            $pdf->Cell(25, 6, $row->merk, 1, 0);
+            $pdf->Cell(27, 6, $row->panjang .$row->satuan, 1, 0);
+            $pdf->Cell(35, 6, date('d F Y', $row->date_created), 1, 1);
+            $i++;
+        }
+        $pdf->Cell(10, 7, '', 0, 1);
+        date_default_timezone_set('Asia/Jakarta');
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(190, 7, 'Di Download : ' .date('d/m/Y H:i:s'), 0, 1, 'R');
         $pdf->Output();
     }
 }
