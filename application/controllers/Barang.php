@@ -350,6 +350,10 @@ class Barang extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['nip' => $this->session->userdata('nip')])->row_array();
         $data['barang'] = $this->Model_barang->getAllPoe();
 
+        if ($this->input->post('cari')) {
+            $data['cari'] = $this->Model_barang->cariPOE();
+        }
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
@@ -488,7 +492,7 @@ class Barang extends CI_Controller
         redirect('barang/router');
     }
 
-     // ========================================== Kabel ==========================================
+    // ========================================== Kabel ==========================================
     public function kabel()
     {
         $data['title'] = 'Daftar Barang';

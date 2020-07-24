@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Jul 2020 pada 08.12
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.6
+-- Waktu pembuatan: 14 Nov 2019 pada 01.19
+-- Versi server: 10.1.39-MariaDB
+-- Versi PHP: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -56,10 +57,9 @@ INSERT INTO `barang` (`id`, `id_barang`, `jenis_barang`, `merk`, `sn`, `mac`, `j
 (11, 1, 'AP', 'Huawei', 'FGL1721X2P4', '6C416AB5BE53', 0, 'Ready', 1, 1572588692),
 (12, 1, 'AP', 'Huawei', 'FGL1708S7VY', 'B0FAEB3D660A', 0, 'Ready', 1, 1572588927),
 (16, 1, 'AP', 'Huawei', 'FGL1705S3YJ', '0006F66BF5B1', 0, 'Rusak', 1, 1572876281),
-(17, 2, 'Breket', 'Huawei', 'KWC22480BSS', '', 12, 'Ready', 1, 1572927991),
-(22, 2, 'Breket', 'Huawei', 'FGL1804S800', '', 7, 'Ready', 1, 1572929295),
-(24, 3, 'POE', 'Huawei', 'FGL1708SFFF', '0006F66BFFF', 0, 'Ready', 1, 1573121909),
-(25, 3, 'Router', 'Cisco', 'KWC22480BNN', '7426AC38B800', 0, 'Ready', 1, 1595570602);
+(17, 2, 'Breket', '', '', '', 12, 'Ready', 1, 1572927991),
+(22, 2, 'Breket', '', '', '', 7, 'Ready', 1, 1572929295),
+(24, 3, 'POE', 'Huawei', 'FGL1708SFFF', '', 0, 'Ready', 1, 1573121909);
 
 -- --------------------------------------------------------
 
@@ -81,7 +81,8 @@ CREATE TABLE `jenis_barang` (
 INSERT INTO `jenis_barang` (`id`, `nama_barang`, `warna`, `date_created`) VALUES
 (1, 'AP', 'primary', 1573123273),
 (2, 'POE', 'info', 1573123285),
-(3, 'Router', 'danger', 1573123292);
+(3, 'Router', 'danger', 1573123292),
+(4, 'Breket', 'success', 1573123302);
 
 -- --------------------------------------------------------
 
@@ -104,11 +105,9 @@ CREATE TABLE `merk_barang` (
 INSERT INTO `merk_barang` (`id`, `id_barang`, `nama_merk`, `jenis_barang`, `date_created`) VALUES
 (3, 1, 'Huawei', 'AP', 1571839347),
 (4, 1, 'Cisco', 'AP', 1571839368),
-(6, 2, 'Huawei', 'POE', 1572597872),
-(7, 3, 'Cisco', 'Router', 1572597908),
-(9, 3, 'Huawei', 'Router', 1573121661),
-(10, 3, 'Indihome', 'Router', 1595242163),
-(12, 2, 'Cisco', 'POE', 1595570775);
+(6, 3, 'Huawei', 'POE', 1572597872),
+(7, 5, 'Cisco', 'Router', 1572597908),
+(9, 5, 'Huawei', 'Router', 1573121661);
 
 -- --------------------------------------------------------
 
@@ -299,7 +298,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `jenis_barang`
@@ -311,7 +310,7 @@ ALTER TABLE `jenis_barang`
 -- AUTO_INCREMENT untuk tabel `merk_barang`
 --
 ALTER TABLE `merk_barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`

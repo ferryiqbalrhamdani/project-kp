@@ -56,6 +56,7 @@ class User_model extends CI_Model
     public function editUser()
     {
         $data = [
+            'nip' => htmlspecialchars($this->input->post('nip', true)),
             'is_active' => htmlspecialchars($this->input->post('is_active', true)),
             'role_id' => htmlspecialchars($this->input->post('role_id', true))
         ];

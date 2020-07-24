@@ -6,7 +6,7 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-wifi"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">TELKOM <sup>AKSES</sup></div>
+                <div class="sidebar-brand-text mx-3">TELKOM <sup>Indonesia</sup></div>
             </a>
 
             <!-- Divider -->
@@ -34,15 +34,15 @@
 
                 <!-- SIAPKAN SUB-MENU SESUAI MENU -->
                 <?php
-                    $menuId = $m['id'];
-                    $querySubMenu = "SELECT *
+                $menuId = $m['id'];
+                $querySubMenu = "SELECT *
                                FROM `user_sub_menu` JOIN `user_menu` 
                                  ON `user_sub_menu`.`menu_id` = `user_menu`.`id`
                               WHERE `user_sub_menu`.`menu_id` = $menuId
                                 AND `user_sub_menu`.`is_active` = 1
                         ";
-                    $subMenu = $this->db->query($querySubMenu)->result_array();
-                    ?>
+                $subMenu = $this->db->query($querySubMenu)->result_array();
+                ?>
 
                 <?php foreach ($subMenu as $sm) : ?>
                     <?php if ($title == $sm['title']) : ?>

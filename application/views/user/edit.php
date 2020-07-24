@@ -20,6 +20,18 @@
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
+                                                <label for="nip">NIP</label>
+                                            </div>
+                                            :
+                                            <div class="col">
+                                                <input type="text" class="form-control form-control-sm" id="nip" name="nip" value="<?= $user['nip']; ?>">
+                                                <?= form_error('nip', '<small class="text-danger pl-3">', '</small>'); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-control-sm">
+                                        <div class="row">
+                                            <div class="col-md-4">
                                                 <label for="role_id">Role Id</label>
                                             </div>
                                             :

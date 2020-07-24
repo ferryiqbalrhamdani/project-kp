@@ -13,7 +13,7 @@
                             <div class="p-5">
                                 <div class="text-center">
                                     <h4 class="h5 text-gray-900 ">Halama Login</h4>
-                                    <img src="<?= base_url('assets/img/background/telkom-akses.png'); ?>" style="width: 255px;
+                                    <img src="<?= base_url('assets/img/background/Telkom-indonesia.png'); ?>" style="width: 255px;
                                         margin-top: -36px;
                                         margin-left: 58px;" class="mb-3" alt="">
                                 </div>

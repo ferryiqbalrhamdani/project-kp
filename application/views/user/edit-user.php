@@ -35,7 +35,7 @@
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="nip">nip</label>
+                                                <label for="nip">Nip</label>
                                             </div>
                                             :
                                             <div class="col">
@@ -46,7 +46,7 @@
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="email">email</label>
+                                                <label for="email">Email</label>
                                             </div>
                                             :
                                             <div class="col">
@@ -58,7 +58,7 @@
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="telp">telp</label>
+                                                <label for="telp">Telp</label>
                                             </div>
                                             :
                                             <div class="col">
@@ -70,7 +70,7 @@
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="alamat">alamat</label>
+                                                <label for="alamat">Tanggal Lahir</label>
                                             </div>
                                             :
                                             <div class="col">
@@ -82,7 +82,7 @@
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="alamat">alamat</label>
+                                                <label for="alamat">Jenis Kelamin</label>
                                             </div>
                                             :
                                             <div class="col">
@@ -101,7 +101,7 @@
                                     <div class="form-group form-control-sm">
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <label for="alamat">alamat</label>
+                                                <label for="alamat">Alamat</label>
                                             </div>
                                             :
                                             <div class="col">
